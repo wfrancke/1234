@@ -39,7 +39,7 @@ struct miasto
 
 struct kolejka
 {
-	miasto* miasto;
+	miasto* wierzch;
 	kolejka* next;
 	kolejka* prev;
 };

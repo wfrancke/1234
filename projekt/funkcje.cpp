@@ -4,11 +4,11 @@
 
 #include "funkcje.h"
 
-void czytaj(std::string plik_tras,std::string plik_zadania, std::string plik_wyniku)
+void czytaj(std::string plik_tras, std::string plik_zadania, std::string plik_wyniku)
 {
 	std::ifstream trasy(plik_tras);
 	std::ifstream zadanie(plik_zadania);
-	std::ofstream wynik(plik_wyniku,std::ofstream::out | std::ofstream::app);
+	std::ofstream wynik(plik_wyniku, std::ofstream::out | std::ofstream::app);
 
 	std::string miasto_pocz, miasto_konc, lokacja, destynacja;
 	int odleglosc;
@@ -51,7 +51,7 @@ void czytaj(std::string plik_tras,std::string plik_zadania, std::string plik_wyn
 		}
 		else std::cout << "Plik zadania nie zostal znaleziony";
 		usun_miasto(pHead);
-    }
+	}
 	else std::cout << "Plik tras nie zostal znaleziony";
 }
 
@@ -63,14 +63,14 @@ void dodaj_miasto(miasto*& pHead, std::string lokacja, std::string destynacja, i
 
 	if (pHead == nullptr || sprawdzenie == nullptr)
 	{
-		pHead = new miasto{ lokacja, pHead, nullptr, nullptr};
+		pHead = new miasto{ lokacja, pHead, nullptr, nullptr };
 		m1 = pHead;
 	}
 	else m1 = sprawdzenie;
 	sprawdzenie = sprawdz(pHead, destynacja);
 	if (pHead == nullptr || sprawdzenie == nullptr)
 	{
-		pHead = new miasto{ destynacja, pHead, nullptr, nullptr};
+		pHead = new miasto{ destynacja, pHead, nullptr, nullptr };
 		m2 = pHead;
 	}
 	else m2 = sprawdzenie;
@@ -79,7 +79,7 @@ void dodaj_miasto(miasto*& pHead, std::string lokacja, std::string destynacja, i
 
 void dodaj_cel(miasto*& m1, miasto*& m2, int odleglosc)
 {
-	m1->cel = new cele{ m2, m1->cel, odleglosc};
+	m1->cel = new cele{ m2, m1->cel, odleglosc };
 }
 
 miasto* sprawdz(miasto* pHead, std::string nazwa)
@@ -155,7 +155,7 @@ void dijkstra(miasto* pHead, std::string lokacja)
 
 	//////////////
 
-	while (pKolejka)                                              // Dopoki kolejka jest pelna
+	while (pKolejka)                                              // Dopoki kolejka jest pelna                         
 	{
 		while (pKolejka->prev)                                    // ustwiamy pKolejka na poczatek
 		{
@@ -165,22 +165,22 @@ void dijkstra(miasto* pHead, std::string lokacja)
 		kolejka* najblizszy = pKolejka;                           // Szukamy wierzcholka o najmniejszym priorytecie (wadze)
 		while (pKolejka)
 		{
-			if (pKolejka->miasto->waga < najblizszy->miasto->waga)
+			if (pKolejka->wierzch->waga < najblizszy->wierzch->waga)
 				najblizszy = pKolejka;
 			if (pKolejka->next)
 				pKolejka = pKolejka->next;
 			else break;
 		}
 		pKolejka = najblizszy;                                    // Ustawiamy pTablica na wierzcholek o najmniejszym priorytecie
-		if (pKolejka->miasto->waga != inf)
+		if (pKolejka->wierzch->waga != inf)
 		{
-			cele* pCel = pKolejka->miasto->cel;
+			cele* pCel = pKolejka->wierzch->cel;
 			while (pCel)                                              // Sprawdzamy wszystkie mozliwe sciezki
 			{
-				if (pKolejka->miasto->waga + pCel->odleglosc < pCel->wierzcholek->waga)
+				if (pKolejka->wierzch->waga + pCel->odleglosc < pCel->wierzcholek->waga)
 				{
-					pCel->wierzcholek->waga = pCel->odleglosc + pKolejka->miasto->waga;
-					pCel->wierzcholek->poprzednik = pKolejka->miasto;
+					pCel->wierzcholek->waga = pCel->odleglosc + pKolejka->wierzch->waga;
+					pCel->wierzcholek->poprzednik = pKolejka->wierzch;
 				}
 				pCel = pCel->next;
 			}
@@ -193,8 +193,8 @@ void dijkstra(miasto* pHead, std::string lokacja)
 
 		delete pKolejka;                                          // Usuwamy wierzcholek o najmniejszym priorytecie
 
-		if(poprzedni) poprzedni->next = nastepny;                 // Poprawiamy wskazniki
-		if(nastepny) nastepny->prev = poprzedni;
+		if (poprzedni) poprzedni->next = nastepny;                 // Poprawiamy wskazniki
+		if (nastepny) nastepny->prev = poprzedni;
 
 		if (nastepny)pKolejka = nastepny;
 		else pKolejka = poprzedni;
