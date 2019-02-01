@@ -1,0 +1,18 @@
+trasa: Katowice --> Jaslo (190 km):
+ ^ Tarnow --> Jaslo  50
+ ^ Krakow --> Tarnow  70
+ ^ Katowice --> Krakow  70
+
+trasa: Lodz -> Gliwice ( - km): 
+   BRAK POLACZENIA MIEDZY MIASTAMI
+
+trasa: Czestochowa --> Poznan (325 km):
+ ^ Lodz --> Poznan  205
+ ^ Czestochowa --> Lodz  120
+
+trasa: Gliwice --> Gliwice ( - km): 
+   PODANY CEL JEST TAKI SAM JAK LOKACJA
+
+trasa: Olsztyn -> Wroclaw ( - km): 
+   BRAK POLACZENIA MIEDZY MIASTAMI
+
